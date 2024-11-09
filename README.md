@@ -22,4 +22,8 @@ This project is a web-based application for performing Nmap network scans.
    docker pull miloudibilel/web-nmap-scanner:latest
 
 2. **Run the container**:
-docker run -d -p 5001:5001 miloudibilel/web-nmap-scanner
+   ```bash
+   docker run -d -p 5001:5001 miloudibilel/web-nmap-scanner
+
+
+
