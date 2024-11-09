@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nmap Scanner</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+
+     <!-- Favicon -->
+     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+         <h1 class="text-center">Nmap Network Scanner</h1>
+       
+        <form id="scanForm" class="p-4 border rounded bg-white shadow-sm">
+            <div class="mb-3">
+                <label for="ip_range" class="form-label">Enter IP address or range:</label>
+                <input type="text" id="ip_range" name="ip_range" class="form-control" required placeholder="e.g., 192.168.1.1 or 192.168.1.0/24">
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="allPorts" name="all_ports">
+                <label for="allPorts" class="form-check-label">Scan All Ports</label>
+            </div>
+
+            <div class="mb-3" id="portRangeContainer">
+                <label for="port_range" class="form-label">Enter Port or Port Range:</label>
+                <input type="text" id="port_range" name="port_range" class="form-control" placeholder="e.g., 80 or 20-80">
+            </div>
+
+            <h3 class="h5">Scan Options:</h3>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="scan_options" value="-Pn" id="noPing">
+                <label for="noPing" class="form-check-label">No Ping (-Pn)</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="scan_options" value="-A" id="aggressiveScan">
+                <label for="aggressiveScan" class="form-check-label">Aggressive Scan (-A)</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="scan_options" value="-vv" id="verbosity">
+                <label for="verbosity" class="form-check-label">verbosity level 2 (-vv)</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="scan_options" value="-sn" id="pingScan">
+                <label for="pingScan" class="form-check-label">Ping Scan (-sn)</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="scan_options" value="-sV" id="ServiceVersionDetection">
+                <label for="ServiceVersionDetection" class="form-check-label">Service Version Detection (-sV)</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="scan_options" value="-O" id="OsDiscovery">
+                <label for="OsDiscovery" class="form-check-label">Os Discovery (-O)</label>
+            </div>
+
+            <h3 class="h5 mt-3">Scan Types:</h3>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="scan_type" value="-sS" id="tcpSynScan" checked>
+                <label for="tcpSynScan" class="form-check-label">TCP SYN Scan (-sS)</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="scan_type" value="-sU" id="udpScan">
+                <label for="udpScan" class="form-check-label">UDP Scan (-sU)</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="scan_type" value="-sA" id="ackScan">
+                <label for="ackScan" class="form-check-label">ACK Scan (-sA)</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="scan_type" value="-sT" id="TCPconnectScan">
+                <label for="TCPconnectScan" class="form-check-label">TCP connect scan (-sT)</label>
+            </div>
+
+            <button type="submit" id="scanButton" class="btn btn-primary mt-4">Scan</button>
+        </form>
+
+        <!-- Loading message displayed during the scan -->
+        <div id="loadingMessage" class="pulse" style="display: none;">Scanning in progress, please wait...</div>
+
+        <!-- Results area -->
+        <div id="results" class="border rounded p-3 bg-light"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 <a href="https://github.com/Bilel-code" target="_blank">Miloudi Bilel</a>. All Rights Reserved.</p>
+    </footer>
+
+    <script src="/static/script.js"></script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
